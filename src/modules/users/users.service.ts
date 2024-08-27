@@ -13,7 +13,7 @@ import { User } from '@prisma/client';
 export class UsersService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<any> {
     const userExists = await this.prismaService.user.findUnique({
       where: {
         email: createUserDto.email,
