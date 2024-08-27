@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -32,11 +33,9 @@ export class AuthService {
     };
   }
 
-  async register(user: any) {
-    const hashedPassword = bcrypt.hashSync(user.password, 10);
+  async register(user: CreateUserDto) {
     const newUser = await this.usersService.create({
       ...user,
-      password: hashedPassword,
     });
     return newUser;
   }
