@@ -18,8 +18,8 @@ export class AuthController {
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
     const token = await this.authService.login(req.user);
-    res.cookie('jwt', token.access_token, { httpOnly: true });
-    return { message: 'Login successful' };
+    // res.cookie('jwt', token.access_token, { httpOnly: true });
+    return { message: 'Login successful', token: token.access_token };
   }
 
   @Post('register')
@@ -29,7 +29,7 @@ export class AuthController {
   ) {
     const user = await this.authService.register(registerDto);
     const token = await this.authService.login(user);
-    res.cookie('jwt', token.access_token, { httpOnly: true });
-    return { message: 'Registration successful' };
+    // res.cookie('jwt', token.access_token, { httpOnly: true });
+    return { message: 'Registration successful', token: token.access_token };
   }
 }

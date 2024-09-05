@@ -23,6 +23,6 @@ export class ChatGateway {
 
   @SubscribeMessage('message')
   handleMessage(client: Socket, message: any) {
-    this.server.emit('message', message);
+    client.broadcast.emit('message', message);
   }
 }
